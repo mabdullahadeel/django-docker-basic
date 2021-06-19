@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,5 +10,8 @@
 <body>
     <h1>Hello World</h1>
     <p>This is demo project dockerizing a django app.</p>
+    <hr>
+    <h5>Image being served from proxy server 👇</h5>
+    <img src="{% static 'coconut_bars.jpg' %}" alt="Delicious chocolate coconut bars" />
 </body>
 </html>

@@ -2,7 +2,10 @@
 FROM python:3.8-alpine
 
 # Adding script to the path of the running container
-ENV PATH="/script:${PATH}"
+ENV PATH="/scripts:${PATH}"
+
+# Moving 'requirements.txt to install dependencies'
+COPY ./requirements.txt /requirements.txt
 
 # Installing packages that are required in order to install the WSGI server
 # - Breakdown
@@ -12,7 +15,7 @@ ENV PATH="/script:${PATH}"
 # --no-cache -> Prevent caching
 # --virtual .tmp -> temporary dependencies that might be removed furhter down the Dockerfile
 # Dependecies being installed --> gcc, lib-dev, linux-headers (require to install 'requirements.txt')
-RUN apk add --update --no-cache --virtual .tmp gcc lib-dev linux-headers
+RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers
 
 # Installing dependencies using 'pip'
 RUN pip install -r /requirements.txt

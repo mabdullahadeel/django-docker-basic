@@ -1,0 +1,18 @@
+version: "3.7"
+
+# basically pointing to the local 'Dockerfile' which in this case is in the same dir
+services:
+	app:
+		build:
+			context: .
+		ports:
+			# map port 8000 on local machine/server to port 8000 on the docker container
+			- "8000:8000"
+		volumes:
+			# mapping /app dir from the local machine to the /app dir on the docker container so that all the changes during development are sync
+			- ./app:/app
+		# starting the django development server as the current docker setup is for dev environment
+		command: sh -c "python manage.py runserver 0.0.0.0:8000"
+		environment: 
+			# Setting up the environment variable to pull in the 'settings.py'
+			- DEBUG=1
